@@ -1,24 +1,24 @@
 <template>
-    <div class="border min-w-min w-min rounded-lg bg-white">
+    <div class="border min-w-min w-min rounded-lg bg-white dark:bg-gray-900 dark:border-none">
       <div class="p-4 w-60">
         <div class="w-52 h-40" :style="{ backgroundColor: canvasColor }">
           <div class="w-full h-full" style="background-image:linear-gradient(90deg,#fff,rgba(204,154,129,0));">
             <div ref="canvas" class="w-full h-full relative cursor-pointer" style="background-image:linear-gradient(0deg,#000,rgba(204,154,129,0));" @mousedown="mousedownCanvas">
-              <div ref="canvasCursor" class="h-4 w-4 border border-gray-200 rounded-full bg-white absolute -left-2 -top-2 pointer-events-none" style="box-shadow:2px 2px 2px 0 rgb(0 0 0 / 20%)"></div>
+              <div ref="canvasCursor" class="h-4 w-4 border border-gray-200 dark:border-none rounded-full bg-white dark:bg-gray-800 absolute -left-2 -top-2 pointer-events-none" style="box-shadow:2px 2px 2px 0 rgb(0 0 0 / 20%)"></div>
             </div>
           </div>
         </div>
         <div class="w-52 flex my-2">
           <div class="w-8 h-8 rounded-lg" style="background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAJElEQVQYV2NctWrVfwYkEBYWxojMZ6SDAmT7QGx0K1EcRBsFAADeG/3M/HteAAAAAElFTkSuQmCC') repeat">
-            <div :style="{ backgroundColor: color }" class="w-full h-full rounded-lg" />
+            <div :style="{ backgroundColor: color }" class="w-full h-full rounded-md border-none" />
           </div>
           <div>
             <div ref="line" class="w-40 h-3 ml-4 relative cursor-pointer rounded" style="background-image:linear-gradient(90deg,red 0,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,red)" @mousedown="mousedownLine">
-              <div ref="lineCursor" class="h-4 w-4 border border-gray-200 rounded-full bg-white absolute -left-2 pointer-events-none" style="top:-2px;box-shadow:2px 2px 2px 0 rgb(0 0 0 / 20%)"></div>
+              <div ref="lineCursor" class="h-4 w-4 border border-gray-200 dark:border-none rounded-full bg-white dark:bg-gray-800 absolute -left-2 pointer-events-none" style="top:-2px;box-shadow:2px 2px 2px 0 rgb(0 0 0 / 20%)"></div>
             </div>
             <div ref="opacityLine" class="w-40 h-3 ml-4 mt-2 relative cursor-pointer rounded" style="background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAJElEQVQYV2NctWrVfwYkEBYWxojMZ6SDAmT7QGx0K1EcRBsFAADeG/3M/HteAAAAAElFTkSuQmCC') repeat" @mousedown="mousedownOpacity">
               <div class="w-full h-full relative" :style="{ background: opacityLineBackground }">
-                <div ref="opacityCursor" class="h-4 w-4 border border-gray-200 rounded-full bg-white absolute -left-2 pointer-events-none" style="top:-2px;box-shadow:2px 2px 2px 0 rgb(0 0 0 / 20%)"></div>
+                <div ref="opacityCursor" class="h-4 w-4 border border-gray-200 dark:border-none rounded-full bg-white dark:bg-gray-800 absolute -left-2 pointer-events-none" style="top:-2px;box-shadow:2px 2px 2px 0 rgb(0 0 0 / 20%)"></div>
               </div>
             </div>
           </div>
@@ -26,25 +26,25 @@
         <div class="flex items-center">
           <div v-show="inputType === 'rgba'" class="flex">
             <div>
-              <p class="text-center text-gray-500 text-sm">R</p>
-              <input v-model="colorLazy.r" @input="inputUpdated" @blur="blurInputR" class="shadow appearance-none border rounded text-center w-10 p-0 text-sm h-8 text-grey-darker" />
+              <p class="text-center text-gray-500 dark:text-gray-300 text-sm">R</p>
+              <input v-model="colorLazy.r" @input="inputUpdated" @blur="blurInputR" class="shadow appearance-none border rounded text-center w-10 p-0 text-sm h-8 text-grey-darker dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700" />
             </div>
             <div class="mx-1">
-              <p class="text-center text-gray-500 text-sm">G</p>
-              <input v-model="colorLazy.g" @input="inputUpdated" @blur="blurInputG" class="shadow appearance-none border rounded text-center w-10 p-0 text-sm h-8 text-grey-darker" />
+              <p class="text-center text-gray-500 dark:text-gray-300 text-sm">G</p>
+              <input v-model="colorLazy.g" @input="inputUpdated" @blur="blurInputG" class="shadow appearance-none border rounded text-center w-10 p-0 text-sm h-8 text-grey-darker dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700" />
             </div>
             <div class="mr-1">
-              <p class="text-center text-gray-500 text-sm">B</p>
-              <input v-model="colorLazy.b" @input="inputUpdated" @blur="blurInputB" class="shadow appearance-none border rounded text-center w-10 p-0 text-sm h-8 text-grey-darker" />
+              <p class="text-center text-gray-500 dark:text-gray-300 text-sm">B</p>
+              <input v-model="colorLazy.b" @input="inputUpdated" @blur="blurInputB" class="shadow appearance-none border rounded text-center w-10 p-0 text-sm h-8 text-grey-darker dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700" />
             </div>
             <div>
-              <p class="text-center text-gray-500 text-sm">A</p>
-              <input v-model="colorLazy.a" @input="inputUpdated" @blur="blurInputA" class="shadow appearance-none border rounded text-center w-10 p-0 text-sm h-8 text-grey-darker" />
+              <p class="text-center text-gray-500 dark:text-gray-300 text-sm">A</p>
+              <input v-model="colorLazy.a" @input="inputUpdated" @blur="blurInputA" class="shadow appearance-none border rounded text-center w-10 p-0 text-sm h-8 text-grey-darker dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700" />
             </div>
           </div>
           <div v-show="inputType === 'hexa'" class="mr-3">
             <p class="text-gray-500 text-center text-sm">HEXA</p>
-            <input v-model="colorLazy.hexa" @input="hexaInputUpdated" @blur="blurInputHexa" class="shadow appearance-none border rounded text-center w-40 h-8 text-grey-darker" />
+            <input v-model="colorLazy.hexa" @input="hexaInputUpdated" @blur="blurInputHexa" class="shadow appearance-none border rounded text-center w-40 h-8 text-grey-darker dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700" />
           </div>
           <div class="px-2 text-gray-500 cursor-pointer" @mousedown.prevent @click.stop.prevent="toggleInputs">
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
