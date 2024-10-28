@@ -1,3 +1,9 @@
+# Made to work with latest Tailwind and Vue3.
+## As of 28th of October, 2024
+
+
+
+
 # Vue Tailwind Color Picker
 
 Color picker for vue using Tailwind v2.
